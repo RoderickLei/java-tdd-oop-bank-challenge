@@ -9,7 +9,7 @@ import java.util.List;
 public class AccountTest {
     @Test
     public void ShouldDepositAmount(){
-        Account account = new Account("Test Account");
+        Account account = new SavAcc("Test Account");
 
         Assertions.assertEquals(0f, account.getBalance());
         Assertions.assertTrue(account.deposit(1000f));
@@ -38,7 +38,7 @@ public class AccountTest {
 
     @Test
     public void ShouldRegisterTransaction(){
-        Account account = new Account("Test Account");
+        Account account = new CurrAcc("Test Account");
 
         account.deposit(1000f);
         account.withdraw(500f);

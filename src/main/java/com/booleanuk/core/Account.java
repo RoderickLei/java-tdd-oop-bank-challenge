@@ -54,6 +54,6 @@ public class Account{
     }
 
     public String getBankStatementOutput(){
-        return "";
+        return bankStatement.generate();
     }
 }

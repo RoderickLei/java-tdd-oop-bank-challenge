@@ -17,6 +17,31 @@ public class BankStatement {
     }
 
     public String generate() {
-        return "";
+        String result = "date || credit || debit || balance\n";
+
+        List<Transaction> reversedList = new ArrayList<>(transactions);
+        Collections.reverse(reversedList);
+
+        for (Transaction tran : reversedList) {
+            String date = tran.getCurrDate().getDayOfMonth() + "/" +
+                    tran.getCurrDate().getMonthValue() + "/" +
+                    tran.getCurrDate().getYear();
+
+            String credit = "";
+            if (tran.getCredit() != 0) {
+                credit = String.format("%.2f", tran.getCredit());
+            }
+
+            String debit = "";
+            if (tran.getDebit() != 0) {
+                debit = String.format("%.2f", tran.getDebit());
+            }
+
+            String balance = String.format("%.2f", tran.getBalance());;
+
+            result = result + date + " || " + credit + " || " + debit + " || " + balance + "\n";
+        }
+
+        return result;
     }
 }
