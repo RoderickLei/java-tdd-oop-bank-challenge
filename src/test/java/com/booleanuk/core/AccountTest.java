@@ -72,7 +72,7 @@ public class AccountTest {
                 tran.getCurrDate().getYear();
 
         String bankStatement =
-                "date || credit || debit || balance\n" + date + " || 1000,00 ||  || 1000,00\n";
+                "date || credit || debit || balance\n" + date + " || 1000.00 ||  || 1000.00\n";
 
         Assertions.assertEquals(bankStatement, account.getBankStatement().generate());
     }

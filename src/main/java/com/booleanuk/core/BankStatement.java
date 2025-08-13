@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class BankStatement {
     private List<Transaction> transactions;
@@ -29,15 +30,15 @@ public class BankStatement {
 
             String credit = "";
             if (tran.getCredit() != 0) {
-                credit = String.format("%.2f", tran.getCredit());
+                credit = String.format(Locale.US,"%.2f", tran.getCredit());
             }
 
             String debit = "";
             if (tran.getDebit() != 0) {
-                debit = String.format("%.2f", tran.getDebit());
+                debit = String.format(Locale.US,"%.2f", tran.getDebit());
             }
 
-            String balance = String.format("%.2f", tran.getBalance());;
+            String balance = String.format(Locale.US,"%.2f", tran.getBalance());;
 
             result = result + date + " || " + credit + " || " + debit + " || " + balance + "\n";
         }
