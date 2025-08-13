@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BankStatement {
@@ -12,5 +14,9 @@ public class BankStatement {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public String generate() {
+        return "";
     }
 }

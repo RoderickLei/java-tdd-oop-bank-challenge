@@ -8,6 +8,7 @@ public class Account{
     public Account(String accName){
         this.accName = accName;
         this.balance = 0.0f;
+        bankStatement = new BankStatement();
     }
 
     public String getAccName() {
@@ -23,22 +24,36 @@ public class Account{
     }
 
     public boolean deposit(float amount){
+        if(amount > 0) {
+            this.balance += amount;
+            makeTransaction(amount, "Credit");
+            return true;
+        }
         return false;
     }
 
     public boolean withdraw(float amount){
+        if(amount>0 && this.balance>amount){
+            this.balance -= amount;
+            makeTransaction(amount, "Debit");
+            return true;
+        }
         return false;
     }
 
     public boolean makeTransaction(float amount, String type){
-        return false;
+        Transaction transaction;
+        if(type == "Credit") {
+            transaction = new Transaction(amount, 0f, this.balance);
+            bankStatement.getTransactions().add(transaction);
+        }else if(type == "Debit") {
+            transaction = new Transaction(0f, amount, this.balance);
+            bankStatement.getTransactions().add(transaction);
+        }
+        return true;
     }
 
-    public void updateBalance(float amount){
-
-    }
-
-    public String printBST(){
+    public String getBankStatementOutput(){
         return "";
     }
 }

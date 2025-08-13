@@ -19,7 +19,6 @@ public class AccountTest {
 
         Assertions.assertFalse(account.deposit(-100f));
         Assertions.assertFalse(account.deposit(0f));
-        //Hoeveel cijfers achter de komma
     }
 
     @Test
@@ -59,5 +58,22 @@ public class AccountTest {
         Assertions.assertEquals(500f, tran2.getDebit());
         Assertions.assertEquals(500f, tran2.getBalance());
         Assertions.assertEquals(LocalDate.now(), tran2.getCurrDate());
+    }
+
+    @Test
+    public void shouldGenerateBankStatement() {
+        Account account = new Account("Test");
+        account.deposit(1000f);
+
+        Transaction tran = account.getBankStatement().getTransactions().get(0);
+
+        String date = tran.getCurrDate().getDayOfMonth() + "/" +
+                tran.getCurrDate().getMonthValue() + "/" +
+                tran.getCurrDate().getYear();
+
+        String bankStatement =
+                "date || credit || debit || balance\n" + date + " || 1000,00 ||  || 1000,00\n";
+
+        Assertions.assertEquals(bankStatement, account.getBankStatement().generate());
     }
 }
